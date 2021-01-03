@@ -1,5 +1,5 @@
 public class User {
     public static void main(String[] args) {
-        System.out.println("Hello World");
+        new InitStations("D:/Program/vscode/Java/maven/other/info_station.xlsx", "Sheet1");
     }
 }

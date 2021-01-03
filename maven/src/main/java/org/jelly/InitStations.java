@@ -1,8 +1,8 @@
 import java.io.*;
-import java.util.List;
-import java.util.Map;
 import java.util.Vector;
-import 
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class InitStations {
     Vector<Integer> stations = new Vector<Integer>();
@@ -13,16 +13,16 @@ public class InitStations {
         this.initStations(n);
     }
 
-    public InitStations(List<Map> dataList) {
-        new InitStations(dataList);
-        this.initStations(dataList);
+    public InitStations(String filePath, String sheetName) {
+        new InitStations(filePath, sheetName);
+        this.initStations(filePath, sheetName);
     }
 
-    //手工创建站点信息
+    // 手工创建站点信息
     public void initStations(int n) {
         for (int i = 0; i < n; ++i) {
             try {
-                //输入起始站、终点站、站点间的票价（以','分隔开）
+                // 输入起始站、终点站、站点间的票价（以','分隔开）
                 BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
                 String str = in.readLine();
                 System.out.println(str.getClass());
@@ -36,20 +36,48 @@ public class InitStations {
         }
     }
 
-    //从表格输入站点信息
-    public void initStations() {
+    /** 
+     * 从表格获取站点信息
+     * @param filePath excel路径
+     * @param sheetName sheet表名
+     */
+    public void initStations(String filePath, String sheetName) {
+        // filePath已用路径代替
         File file = new File("D:/Program/vscode/Java/maven/other/info_station.xlsx");
+        XSSFSheet sheet = null;
+        InputStream fileInputStream = null;
         try {
-            InputStream fileInputStream = new FileInputStream(file.getAbsolutePath());
-            
+            fileInputStream = new FileInputStream(file.getAbsolutePath());
+            XSSFWorkbook sheets = new XSSFWorkbook(fileInputStream);
+            //sheetName已被代替
+            sheet = sheets.getSheet("Sheet1");
         } catch (Exception e) {
-            //TODO: handle exception
+            // TODO: handle exception
         }
-       
+        int rows = sheet.getPhysicalNumberOfRows();
+        for (int i = 0; i < rows;++i) {
+            XSSFRow row = sheet.getRow(i);
+            int columns = row.getPhysicalNumberOfCells();
+            for (int j = 0; j < columns; ++j) {
+                String cell = row.getCell(j).toString();
+                System.out.print(cell);
+            }
+        }
     }
 
-    public static void main(String args[]) {
-
+    /**
+     * 根据行和列索引获取单元格的数据
+     * @param sheet
+     * @param row
+     * @param columm
+     * @return
+     */
+    public String getExcelDateByIndex(XSSFSheet sheet, int row, int column) {
+        XSSFRow row1 = sheet.getRow(row);
+        String cell = row1.getCell(column).toString();
+        return cell;
     }
 
 }
+
+
