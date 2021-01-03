@@ -1,3 +1,4 @@
+package org.jelly;
 import java.io.*;
 import java.util.Vector;
 import org.apache.poi.xssf.usermodel.XSSFRow;
@@ -51,6 +52,7 @@ public class InitStations {
             XSSFWorkbook sheets = new XSSFWorkbook(fileInputStream);
             //sheetName已被代替
             sheet = sheets.getSheet("Sheet1");
+            sheets.close();
         } catch (Exception e) {
             // TODO: handle exception
         }
@@ -63,6 +65,7 @@ public class InitStations {
                 System.out.print(cell);
             }
         }
+        
     }
 
     /**
