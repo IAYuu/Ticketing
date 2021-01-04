@@ -1,4 +1,5 @@
 package org;
+
 import java.io.*;
 import java.util.Vector;
 import org.apache.poi.xssf.usermodel.XSSFRow;
@@ -35,40 +36,32 @@ public class InitStations {
         }
     }
 
-    /** 
+    /**
      * 从表格获取站点信息
-     * @param filePath excel路径
+     * 
+     * @param filePath  csv路径
      * @param sheetName sheet表名
      */
-    public void initStations(String filePath, String sheetName) {
-        File file = new File(filePath);
-        XSSFSheet sheet = null;
-        InputStream fileInputStream = null;
+    public void initStations(String filePath) {
+        File csv = new File(filePath);
         try {
-            fileInputStream = new FileInputStream(file.getAbsolutePath());
-            XSSFWorkbook sheets = new XSSFWorkbook(fileInputStream);
-            //sheetName已被代替
-            sheet = sheets.getSheet("Sheet1");
-            sheets.close();
-        } catch (Exception e) {
+            BufferedReader textFile = new BufferedReader(new FileReader(csv));
+            String lineData = "";
+            while ((lineData = textFile.readLine()) != null)
+                System.out.println(lineData);
+            textFile.close();
+        } catch (FileNotFoundException e) {
             // TODO: handle exception
+            System.out.println("file not found");
+        } catch (IOException e) {
+            System.out.println("file read/write wrong");
         }
 
-        int rows = sheet.getPhysicalNumberOfRows();
-        for (int i = 0; i < rows;++i) {
-            XSSFRow row = sheet.getRow(i);
-            int columns = row.getPhysicalNumberOfCells();
-            for (int j = 0; j < columns; ++j) {
-                String cell = row.getCell(j).toString();
-                System.out.print(cell);
-            }
-        }
-
-        
     }
 
     /**
      * 根据行和列索引获取单元格的数据
+     * 
      * @param sheet
      * @param row
      * @param columm
@@ -81,5 +74,3 @@ public class InitStations {
     }
 
 }
-
-
