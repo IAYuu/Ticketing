@@ -10,7 +10,7 @@ public class TicketingSystem{
     public void changeTicket(){
         
     }
-    public void backTicket(){
+    public void returnTicket(){
         
     }
 }
