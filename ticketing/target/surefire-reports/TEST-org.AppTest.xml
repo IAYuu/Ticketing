@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="org.AppTest" time="0.086" tests="1" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="org.AppTest" time="0.083" tests="1" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="15"/>
     <property name="sun.cpu.isalist" value="amd64"/>
     <property name="sun.jnu.encoding" value="GBK"/>
-    <property name="java.class.path" value="D:\Program\vscode\Java\ticketing\target\test-classes;D:\Program\vscode\Java\ticketing\target\classes;C:\Users\一只banana\.m2\repository\junit\junit\4.11\junit-4.11.jar;C:\Users\一只banana\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\一只banana\.m2\repository\org\apache\poi\poi-ooxml\3.15\poi-ooxml-3.15.jar;C:\Users\一只banana\.m2\repository\org\apache\poi\poi\3.15\poi-3.15.jar;C:\Users\一只banana\.m2\repository\commons-codec\commons-codec\1.10\commons-codec-1.10.jar;C:\Users\一只banana\.m2\repository\org\apache\commons\commons-collections4\4.1\commons-collections4-4.1.jar;C:\Users\一只banana\.m2\repository\org\apache\poi\poi-ooxml-schemas\3.15\poi-ooxml-schemas-3.15.jar;C:\Users\一只banana\.m2\repository\org\apache\xmlbeans\xmlbeans\2.6.0\xmlbeans-2.6.0.jar;C:\Users\一只banana\.m2\repository\stax\stax-api\1.0.1\stax-api-1.0.1.jar;C:\Users\一只banana\.m2\repository\com\github\virtuald\curvesapi\1.04\curvesapi-1.04.jar;C:\Users\一只banana\.m2\repository\mysql\mysql-connector-java\8.0.22\mysql-connector-java-8.0.22.jar;C:\Users\一只banana\.m2\repository\com\google\protobuf\protobuf-java\3.11.4\protobuf-java-3.11.4.jar;"/>
+    <property name="java.class.path" value="D:\Program\vscode\Java\ticketing\target\test-classes;D:\Program\vscode\Java\ticketing\target\classes;C:\Users\一只banana\.m2\repository\junit\junit\4.11\junit-4.11.jar;C:\Users\一只banana\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\一只banana\.m2\repository\org\apache\poi\poi-ooxml\3.15\poi-ooxml-3.15.jar;C:\Users\一只banana\.m2\repository\org\apache\poi\poi\3.15\poi-3.15.jar;C:\Users\一只banana\.m2\repository\commons-codec\commons-codec\1.10\commons-codec-1.10.jar;C:\Users\一只banana\.m2\repository\org\apache\commons\commons-collections4\4.1\commons-collections4-4.1.jar;C:\Users\一只banana\.m2\repository\org\apache\poi\poi-ooxml-schemas\3.15\poi-ooxml-schemas-3.15.jar;C:\Users\一只banana\.m2\repository\org\apache\xmlbeans\xmlbeans\2.6.0\xmlbeans-2.6.0.jar;C:\Users\一只banana\.m2\repository\stax\stax-api\1.0.1\stax-api-1.0.1.jar;C:\Users\一只banana\.m2\repository\com\github\virtuald\curvesapi\1.04\curvesapi-1.04.jar;C:\Users\一只banana\.m2\repository\mysql\mysql-connector-java\5.1.47\mysql-connector-java-5.1.47.jar;"/>
     <property name="java.vm.vendor" value="Oracle Corporation"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="user.variant" value=""/>
@@ -15,9 +15,9 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="CN"/>
     <property name="sun.boot.library.path" value="D:\Program\jdk\bin"/>
-    <property name="sun.java.command" value="C:\Temp\surefire2218258058023881672\surefirebooter13978069526692054398.jar C:\Temp\surefire2218258058023881672 2021-01-04T15-37-30_588-jvmRun1 surefire5401825275707948640tmp surefire_011808139798462107367tmp"/>
+    <property name="sun.java.command" value="C:\Temp\surefire11680278281822557764\surefirebooter12441910095869163077.jar C:\Temp\surefire11680278281822557764 2021-01-04T17-21-28_088-jvmRun1 surefire12638444562341471800tmp surefire_011792987250556575415tmp"/>
     <property name="jdk.debug" value="release"/>
-    <property name="surefire.test.class.path" value="D:\Program\vscode\Java\ticketing\target\test-classes;D:\Program\vscode\Java\ticketing\target\classes;C:\Users\一只banana\.m2\repository\junit\junit\4.11\junit-4.11.jar;C:\Users\一只banana\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\一只banana\.m2\repository\org\apache\poi\poi-ooxml\3.15\poi-ooxml-3.15.jar;C:\Users\一只banana\.m2\repository\org\apache\poi\poi\3.15\poi-3.15.jar;C:\Users\一只banana\.m2\repository\commons-codec\commons-codec\1.10\commons-codec-1.10.jar;C:\Users\一只banana\.m2\repository\org\apache\commons\commons-collections4\4.1\commons-collections4-4.1.jar;C:\Users\一只banana\.m2\repository\org\apache\poi\poi-ooxml-schemas\3.15\poi-ooxml-schemas-3.15.jar;C:\Users\一只banana\.m2\repository\org\apache\xmlbeans\xmlbeans\2.6.0\xmlbeans-2.6.0.jar;C:\Users\一只banana\.m2\repository\stax\stax-api\1.0.1\stax-api-1.0.1.jar;C:\Users\一只banana\.m2\repository\com\github\virtuald\curvesapi\1.04\curvesapi-1.04.jar;C:\Users\一只banana\.m2\repository\mysql\mysql-connector-java\8.0.22\mysql-connector-java-8.0.22.jar;C:\Users\一只banana\.m2\repository\com\google\protobuf\protobuf-java\3.11.4\protobuf-java-3.11.4.jar;"/>
+    <property name="surefire.test.class.path" value="D:\Program\vscode\Java\ticketing\target\test-classes;D:\Program\vscode\Java\ticketing\target\classes;C:\Users\一只banana\.m2\repository\junit\junit\4.11\junit-4.11.jar;C:\Users\一只banana\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\一只banana\.m2\repository\org\apache\poi\poi-ooxml\3.15\poi-ooxml-3.15.jar;C:\Users\一只banana\.m2\repository\org\apache\poi\poi\3.15\poi-3.15.jar;C:\Users\一只banana\.m2\repository\commons-codec\commons-codec\1.10\commons-codec-1.10.jar;C:\Users\一只banana\.m2\repository\org\apache\commons\commons-collections4\4.1\commons-collections4-4.1.jar;C:\Users\一只banana\.m2\repository\org\apache\poi\poi-ooxml-schemas\3.15\poi-ooxml-schemas-3.15.jar;C:\Users\一只banana\.m2\repository\org\apache\xmlbeans\xmlbeans\2.6.0\xmlbeans-2.6.0.jar;C:\Users\一只banana\.m2\repository\stax\stax-api\1.0.1\stax-api-1.0.1.jar;C:\Users\一只banana\.m2\repository\com\github\virtuald\curvesapi\1.04\curvesapi-1.04.jar;C:\Users\一只banana\.m2\repository\mysql\mysql-connector-java\5.1.47\mysql-connector-java-5.1.47.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
     <property name="user.home" value="C:\Users\一只banana"/>
     <property name="user.language" value="zh"/>
@@ -30,7 +30,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Temp\surefire2218258058023881672\surefirebooter13978069526692054398.jar"/>
+    <property name="surefire.real.class.path" value="C:\Temp\surefire11680278281822557764\surefirebooter12441910095869163077.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="15.0.1+9-18"/>
@@ -55,5 +55,5 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="59.0"/>
   </properties>
-  <testcase name="shouldAnswerWithTrue" classname="org.AppTest" time="0.003"/>
+  <testcase name="shouldAnswerWithTrue" classname="org.AppTest" time="0.001"/>
 </testsuite>

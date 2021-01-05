@@ -1,5 +1,5 @@
-package org;
-import org.utils.IO;
+package com;
+import com.utils.IO;
 import java.util.Vector;
 
 public class InitStations {
