@@ -2,8 +2,6 @@ package com.utils.database;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
-import java.util.Iterator;
-import java.util.Map.Entry;
 
 enum CMDTYPE {
     INSERT, DELETE, UPDATE, SEARCH, NONE
@@ -16,8 +14,8 @@ public class SqlCmd {
     private ArrayList<String> pros;
     private ArrayList<String> vals;
 
-    public SqlCmd(CMDTYPE type, String tableName) {
-        this.type = type;
+    public SqlCmd(CMDTYPE insert, String tableName) {
+        this.type = insert;
         this.tableName = tableName;
         hash = new Hashtable<>();
         pros = new ArrayList<>();
@@ -70,7 +68,7 @@ public class SqlCmd {
     private String toDeleteString() {
         addProsAndVals();
         // complete idmatch
-        // TODO
+        // TODO:
         return String.format("delete from %s where id = %s;", tableName, "idmatch");
     }
 
@@ -84,7 +82,7 @@ public class SqlCmd {
     private String toUpdateString() {
         addProsAndVals();
         // complete idmatch
-        // FIXME
+        // FIXME:
         return String.format("update %s set %s = %s where ? = ?;", tableName, String.join(",", pros),
                 String.join(",", vals), "idmatch");
     }
