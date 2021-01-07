@@ -71,7 +71,7 @@ public abstract class DataBase<T> {
     }
 
     public static void main(String args[]) throws Exception {
-        // TODO
-        DataBase db = new DataBase();
+        // TODO:
+        // DataBase db = new DataBase();
     }
 }
