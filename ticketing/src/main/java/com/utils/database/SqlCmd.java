@@ -3,9 +3,7 @@ package com.utils.database;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
-enum CMDTYPE {
-    INSERT, DELETE, UPDATE, SEARCH, NONE
-};
+import com.rpc.Macro.CMDTYPE;
 
 public class SqlCmd {
     private Hashtable<String, String> hash;
@@ -14,8 +12,8 @@ public class SqlCmd {
     private ArrayList<String> pros;
     private ArrayList<String> vals;
 
-    public SqlCmd(CMDTYPE insert, String tableName) {
-        this.type = insert;
+    public SqlCmd(CMDTYPE type , String tableName) {
+        this.type = type;
         this.tableName = tableName;
         hash = new Hashtable<>();
         pros = new ArrayList<>();
@@ -28,8 +26,8 @@ public class SqlCmd {
                 return toInsertString();
             case DELETE:
                 return toDeleteString();
-            case SEARCH:
-                return toSearchString();
+            case QUERY:
+                return toQueryString();
             case UPDATE:
                 return toUpdateString();
             default:
@@ -68,14 +66,15 @@ public class SqlCmd {
     private String toDeleteString() {
         addProsAndVals();
         // complete idmatch
-        // TODO:
+        //FIXME: 
         return String.format("delete from %s where id = %s;", tableName, "idmatch");
     }
 
-    // search ?.. from ?
-    private String toSearchString() {
+    // select ?.. from ? where ? = ?
+    private String toQueryString() {
         addProsAndVals();
-        return String.format("search (%s) from %s", String.join(",", pros), tableName);
+        // return String.format("select %s from %s", String.join(",", pros), tableName);
+        return String.format("select %s from %s", "*", tableName);
     }
 
     // update ? set ? = ? where ? = ?

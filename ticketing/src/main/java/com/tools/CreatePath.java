@@ -1,4 +1,4 @@
-package com;
+package com.tools;
 
 public class CreatePath{
     int start;

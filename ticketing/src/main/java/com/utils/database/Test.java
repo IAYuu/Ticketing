@@ -1,10 +1,11 @@
 package com.utils.database;
 
+import com.rpc.Macro.CMDTYPE;
 
 public class Test {
     public static void main(String[] args) throws Exception {
 
-    DataBase st = new Station();
+    Station st = new Station();
     SqlCmd sc = new SqlCmd(CMDTYPE.INSERT, "stations");
     sc.setProperty("id", "4");
     sc.setProperty("start", "'a'");
@@ -12,7 +13,8 @@ public class Test {
     sc.setProperty("price", "20");
     sc.setProperty("start_time", "'12:30'");
     sc.setProperty("reach_time", "'11:30'");
-    st.execute(sc);
+    st.insert(sc);
+    st.queryStaion(sc);
     
     }
 }
