@@ -21,7 +21,7 @@ public abstract class DataBase {
         logger = Logger.getLogger(DataBase.class.getName());
         Config config = new Config();
         URL = (String)config.getProp("database", "URL");
-        USER = (String)config.getProp("databse", "USER");
+        USER = (String)config.getProp("database", "USER");
         PASSWORD = (String)config.getProp("database", "PASSWORD");
     }
 
@@ -30,6 +30,7 @@ public abstract class DataBase {
     }
 
     public ArrayList<HashMap> query(SqlCmd sc) {
+        logger.info("execute query: " + sc.toString());
         return executeQuery(sc);
     }
 

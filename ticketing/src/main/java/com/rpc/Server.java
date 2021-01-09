@@ -2,6 +2,7 @@ package com.rpc;
 
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.util.logging.Logger;
 
 import com.jelly.thrift.ticketing.TickSrv;
 import com.utils.database.Config;
@@ -13,11 +14,14 @@ import org.apache.thrift.transport.TServerSocket;
 import org.apache.thrift.transport.TTransportException;
 
 public class Server {
+    private static Logger logger = Logger.getLogger(Server.class.getName());
     public static void main(String[] args) throws IOException, TTransportException {
         try {
             TickSrv.Processor<TickSrv.Iface> tprocessor = new TickSrv.Processor<TickSrv.Iface>(new ServiceImpl());
-            int host = (Integer)(new Config().getProp("server", "SERVER_IP"));
-            ServerSocket socket = new ServerSocket(host);
+            Config config = new Config();
+            int port = (Integer)(config.getProp("server", "SERVER_PORT"));
+            logger.info("----------" + port);
+            ServerSocket socket = new ServerSocket(port);
             TServerSocket serverTransport = new TServerSocket(socket);
             TServer.Args tArgs = new TServer.Args(serverTransport);
             tArgs.processor(tprocessor);

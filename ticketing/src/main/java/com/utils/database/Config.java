@@ -41,8 +41,9 @@ public class Config {
     }
 
     public Object getProp(String root, String key) {
+        logger.info("getProp table: " + root);
         Map<String, Object> rootProp = props.get(root);
-        logger.info("Query key: " + key);
+        logger.info("props: " + props);
         assert(rootProp.containsKey(key));
         return rootProp.get(key);
     }
