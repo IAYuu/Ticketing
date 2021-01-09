@@ -1,0 +1,10 @@
+# srv.yml
+server:
+  SERVER_IP: localhost
+  SERVER_PORT: 333
+  TIMEOUT: 30000
+
+database:
+  URL: jdbc:mysql://localhost:3306/ticketing
+  USER: root
+  PASSWORD: 123

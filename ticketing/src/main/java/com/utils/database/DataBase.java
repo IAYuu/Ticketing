@@ -2,76 +2,92 @@ package com.utils.database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.logging.Logger;
 
-public abstract class DataBase<T> {
-    private static final String URL = "jdbc:mysql://localhost:3306/ticketing";
-    private static final String USER = "root";
-    private static final String PASSWORD = "123";
+public abstract class DataBase {
+
+    private static String URL;
+    private static String USER;
+    private static String PASSWORD;
     protected String name = "";
+    private Logger logger = null;
 
-    // JDBC查询
-    public void retrive() throws Exception {
-        try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD)) {
-            try (PreparedStatement ps = conn.prepareStatement("select * from " + name)) {
-                try (ResultSet rs = ps.executeQuery()) {
-                    // test/
-                    while (rs.next()) {
-                        String start = rs.getString(1);
-                        String end = rs.getString(2);
-                        int distance = rs.getInt(3);
-                        System.out.println(start + "->" + end + "\t" + distance);
+    public DataBase() {
+        logger = Logger.getLogger(DataBase.class.getName());
+        Config config = new Config();
+        URL = (String)config.getProp("database", "URL");
+        USER = (String)config.getProp("databse", "USER");
+        PASSWORD = (String)config.getProp("database", "PASSWORD");
+    }
+
+    protected String getClassName() {
+        return name;
+    }
+
+    public ArrayList<HashMap> query(SqlCmd sc) {
+        return executeQuery(sc);
+    }
+
+    public boolean insert(SqlCmd sc) {
+        executeUpdate(sc);
+        return false;
+    }
+
+    public boolean delete(SqlCmd sc) {
+        executeUpdate(sc);
+        return false;
+    }
+
+    public boolean update(SqlCmd sc) {
+        executeUpdate(sc);
+        return false;
+    }
+
+    private void executeUpdate(SqlCmd sc) {
+        try {
+            try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD)) {
+                // test
+                String sql = sc.toString();
+                try (PreparedStatement ps = conn.prepareStatement(sql)) {
+                    ps.executeUpdate();
+                }
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+    }
+
+    private ArrayList<HashMap> executeQuery(SqlCmd sc) {
+        ArrayList<HashMap> list = null;
+        try {
+            try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD)) {
+                // test
+                String sql = sc.toString();
+                logger.info(String.format("sql cmd: %s", sql));
+                try (PreparedStatement ps = conn.prepareStatement(sql)) {
+                    try (ResultSet rs = ps.executeQuery()) {
+                        ResultSetMetaData md = rs.getMetaData();
+                        int columnCount = md.getColumnCount();
+                        list = new ArrayList<>();
+                        while (rs.next()) {
+                            HashMap rowData = new HashMap();
+                            for (int i = 1; i <= columnCount; ++i)
+                                rowData.put(md.getColumnName(i), rs.getObject(i));
+                            list.add(rowData);
+
+                        }
                     }
                 }
             }
+        } catch (Exception e) {
+            // TODO: handle exception
+            System.err.println("executeQueryError: " + e);
         }
-    }
-
-    // JDBC插入
-    public void insert(T[] args) throws Exception {
-        try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD)) {
-            // test
-            try (PreparedStatement ps = conn
-                    .prepareStatement("insert into " + name + " (start, end, distance) values(?,?,?);")) {
-                for (int i = 1; i <= args.length; ++i)
-                    ps.setObject(i, args[i]);
-                int n = ps.executeUpdate();
-                System.out.println("insert:" + n);
-            }
-        }
-    }
-
-    // JDBC更新
-    public void update(T[] args) throws Exception {
-        try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD)) {
-            // test
-            try (PreparedStatement ps = conn.prepareStatement("update" + name + " set ? where ? = ? ")) {
-                for (int i = 1; i <= args.length; ++i)
-                    ps.setObject(i, args[i]);
-                int n = ps.executeUpdate();
-                System.out.println("update:" + n);
-            }
-
-        }
-    }
-
-    // JDBC删除
-    public void delete(T[] args) throws Exception {
-        try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD)) {
-            // test
-            try (PreparedStatement ps = conn.prepareStatement("delete from" + name + " where ? = ?")) {
-                for (int i = 1; i <= args.length; ++i)
-                    ps.setObject(i, args[i]);
-                int n = ps.executeUpdate();
-                System.out.println("delete:" + n);
-            }
-
-        }
-    }
-
-    public static void main(String args[]) throws Exception {
-        // TODO
-        DataBase db = new DataBase();
+        return list;
     }
 }
