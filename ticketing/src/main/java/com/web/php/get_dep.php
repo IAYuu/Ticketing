@@ -11,48 +11,43 @@ error_reporting(E_ALL);
 
 define("THRIFT_ROOT", "D:/Program/thrift/lib/php/lib/");
 define("ROOT", "D:/Program/vscode/Java/ticketing/src/main/java/com/web/php");
-require THRIFT_ROOT . "ClassLoader/ThriftClassLoader.php";
-require THRIFT_ROOT . "Protocol/TProtocol.php";
-require THRIFT_ROOT . "Transport/TTransport.php";
-require THRIFT_ROOT . "Transport/TBufferedTransport.php";
-require THRIFT_ROOT . "Protocol/TBinaryProtocol.php";
-require THRIFT_ROOT . "Transport/TSocket.php";
-require THRIFT_ROOT . "Exception/TException.php";
-require THRIFT_ROOT . "Exception/TTransportException.php";
-require THRIFT_ROOT . "Type/TType.php";
-require THRIFT_ROOT . "StringFunc/TStringFunc.php";
-require THRIFT_ROOT . "Factory\TStringFuncFactory.php";
-require THRIFT_ROOT . "Type/TMessageType.php";
-require THRIFT_ROOT . "StringFunc/Core.php";
+require THRIFT_ROOT . "Thrift/ClassLoader/ThriftClassLoader.php";
 
 include "thrift/TickSrvIf.php";
 include "thrift/TickSrvClient.php";
 include "thrift/TickSrv_login_args.php";
+include "thrift/TickSrv_login_result.php";
+include "thrift/TickSrv_search_args.php";
+include "thrift/TickSrv_search_result.php";
+include "thrift/SearchReq.php";
+include "thrift/Departure.php";
 
 use Thrift\ClassLoader\ThriftClassLoader;
-use Thrift\Protocol\TBinaryProtocol;
-use Thrift\Transport\TSocket;
-use Thrift\Transport\TBufferedTransport;
-use Thrift\Exception\TException;
-use Thrift\Type\TType;
 
 $loader = new ThriftClassLoader();
 $loader->registerNamespace('Thrift', THRIFT_ROOT);
-$loader->registerDefinition('Service', ROOT . 'thrift');
+$loader->registerDefinition('TickSrv', ROOT . 'thrift');
 $loader->register();
 
+use Thrift\Protocol\TBinaryProtocol;
+use Thrift\protocol\TMultiplexedProtocol;
+use Thrift\Transport\TSocket;
+use Thrift\Transport\TBufferedTransport;
+
 try {
-    $sock = new TSocket('localhost', 333);
+    $sock = new TSocket('localhost', 333, true);
     $transport = new TBufferedTransport($sock);
     $proto = new TBinaryProtocol($transport);
+    $proto = new TMultiplexedProtocol($proto,"TickSrv");
+
     $client = new TickSrvClient($proto);
     $transport->open();
-    $recv = $client->login("abc", "abc");
+    $searchReq = new SearchReq("a", "b");
+    $recv = $client->search($searchReq);
+    var_dump($recv);
+    echo 'I am ready';
 } catch (Exception $ex) {
     print 'I am not ready ' . $ex->getMessage() . '\n';
 }
 
 ?>
-
-<!-- post: <?php echo var_dump($_POST) ?>
-get: <?php echo var_dump($_GET) ?> -->
