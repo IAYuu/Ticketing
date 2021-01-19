@@ -12,7 +12,7 @@ public class SqlCmd {
     private ArrayList<String> pros;
     private ArrayList<String> vals;
 
-    public SqlCmd(CMDTYPE type , String tableName) {
+    public SqlCmd(CMDTYPE type, String tableName) {
         this.type = type;
         this.tableName = tableName;
         hash = new Hashtable<>();
@@ -31,8 +31,9 @@ public class SqlCmd {
             case UPDATE:
                 return toUpdateString();
             default:
-                // return "insert into stations (id, start, reach, price, reach_time, start_time) values (2, '湖南', '火星', 12345, '00:11:22', '44:55:22')";
-            assert(false);
+                // return "insert into stations (id, start, reach, price, reach_time,
+                // start_time) values (2, '湖南', '火星', 12345, '00:11:22', '44:55:22')";
+                assert (false);
         }
         return " ";
     }
@@ -65,16 +66,15 @@ public class SqlCmd {
     // delete from ? where id = ?
     private String toDeleteString() {
         addProsAndVals();
-        // complete idmatch
-        //FIXME: 
+        // FIXME:
         return String.format("delete from %s where id = %s;", tableName, "idmatch");
     }
 
     // select ?.. from ? where ? = ?
     private String toQueryString() {
         addProsAndVals();
-        // return String.format("select %s from %s", String.join(",", pros), tableName);
-        return String.format("select %s from %s", "*", tableName);
+        return String.format("select * from %s where %s = \"%s\" and %s = \"%s\"", tableName, pros.get(0), vals.get(0),
+                pros.get(1), vals.get(1));
     }
 
     // update ? set ? = ? where ? = ?

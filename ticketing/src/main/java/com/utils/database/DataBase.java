@@ -20,9 +20,9 @@ public abstract class DataBase {
     public DataBase() {
         logger = Logger.getLogger(DataBase.class.getName());
         Config config = new Config();
-        URL = (String)config.getProp("database", "URL");
-        USER = (String)config.getProp("database", "USER");
-        PASSWORD = (String)config.getProp("database", "PASSWORD");
+        URL = (String) config.getProp("database", "URL");
+        USER = (String) config.getProp("database", "USER");
+        PASSWORD = (String) config.getProp("database", "PASSWORD");
     }
 
     protected String getClassName() {
@@ -68,21 +68,25 @@ public abstract class DataBase {
         try {
             try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD)) {
                 // test
+                // String sql = " select * from stations where start = \"邵阳\" and reach = \"衡水\";";
                 String sql = sc.toString();
                 logger.info(String.format("sql cmd: %s", sql));
                 try (PreparedStatement ps = conn.prepareStatement(sql)) {
+                    logger.info("ps-------------------" + ps.toString());
                     try (ResultSet rs = ps.executeQuery()) {
                         ResultSetMetaData md = rs.getMetaData();
                         int columnCount = md.getColumnCount();
                         list = new ArrayList<>();
+                        assert (rs != null);
                         while (rs.next()) {
                             HashMap rowData = new HashMap();
-                            for (int i = 1; i <= columnCount; ++i)
+                            for (int i = 1; i <= columnCount; ++i) {
                                 rowData.put(md.getColumnName(i), rs.getObject(i));
+                            }
                             list.add(rowData);
-
                         }
                     }
+                    return list;
                 }
             }
         } catch (Exception e) {

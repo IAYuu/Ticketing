@@ -1,17 +1,12 @@
 <?php
 
-// namespace Services\TickSrv;
-
-// if (isset($_GET["start"]))
-//     echo $_GET["start"];
-// if (isset($_GET["reach"]))
-//     echo $_GET["reach"];
-
 error_reporting(E_ALL);
 
 define("THRIFT_ROOT", "D:/Program/thrift/lib/php/lib/");
 define("ROOT", "D:/Program/vscode/Java/ticketing/src/main/java/com/web/php");
 require THRIFT_ROOT . "Thrift/ClassLoader/ThriftClassLoader.php";
+require_once "vendor/autoload.php";
+require_once "vendor/mustangostang/spyc/Spyc.php";
 
 include "thrift/TickSrvIf.php";
 include "thrift/TickSrvClient.php";
@@ -35,19 +30,23 @@ use Thrift\Transport\TSocket;
 use Thrift\Transport\TBufferedTransport;
 
 try {
-    $sock = new TSocket('localhost', 333, true);
-    $transport = new TBufferedTransport($sock);
-    $proto = new TBinaryProtocol($transport);
-    $proto = new TMultiplexedProtocol($proto,"TickSrv");
+    //FIXME:yml
+        // $config = spyc_load_file('srv.yml.lnk');
+        // var_dump($config);
+        $sock = new TSocket('localhost',333, true);
+        $transport = new TBufferedTransport($sock);
+        $proto = new TBinaryProtocol($transport);
+        $proto = new TMultiplexedProtocol($proto, "TickSrv");
+        $client = new TickSrvClient($proto);
+        $transport->open();
 
-    $client = new TickSrvClient($proto);
-    $transport->open();
-    $searchReq = new SearchReq("a", "b");
-    $recv = $client->search($searchReq);
-    var_dump($recv);
-    echo 'I am ready';
+        $var = array("start"=>$_POST["start"], "reach"=>$_POST["reach"]); 
+        $searchReq = new SearchReq($var);
+        // echo $_POST["start"]. "......".$_POST["reach"];
+        // echo $searchReq->reach;
+        $recv = json_encode($client->search($searchReq));
+        echo $recv;
+        // echo 'I am ready';
 } catch (Exception $ex) {
     print 'I am not ready ' . $ex->getMessage() . '\n';
 }
-
-?>

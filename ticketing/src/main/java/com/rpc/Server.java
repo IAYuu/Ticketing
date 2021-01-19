@@ -1,7 +1,6 @@
 package com.rpc;
 
 import java.io.IOException;
-import java.net.ServerSocket;
 import java.util.logging.Logger;
 
 import com.jelly.thrift.ticketing.TickSrv;
@@ -28,18 +27,6 @@ public class Server {
             System.out.println("running server");
             server.serve();
 
-        //     TickSrv.Processor<TickSrv.Iface> tprocessor = new TickSrv.Processor<TickSrv.Iface>(new ServiceImpl());
-        //     Config config = new Config();
-        //     int port = (Integer)(config.getProp("server", "SERVER_PORT"));
-        //     logger.info("----------" + port);
-        //     ServerSocket socket = new ServerSocket(port);
-        //     TServerSocket serverTransport = new TServerSocket(socket);
-        //     TServer.Args tArgs = new TServer.Args(serverTransport);
-        //     tArgs.processor(tprocessor);
-        //     tArgs.protocolFactory(new TCompactProtocol.Factory());
-        //     TServer server = new TSimpleServer(tArgs);
-        //     System.out.println("Running server...");
-        //     server.serve();
         } catch (Exception e) {
             //TODO: handle exception
             System.err.println(e);
