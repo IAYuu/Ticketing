@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>ticketing system</title>
+</head>
+
+<body>
+    <form>
+        始发站 <select name="start" id="start">
+            <option value="邵阳">邵阳</option>
+            <option value="岳阳">岳阳</option>
+            <option value="衡水">衡水</option>
+        </select>
+        终点站 <select name="reach" id="reach">
+            <option value="邵阳">邵阳</option>
+            <option value="岳阳">岳阳</option>
+            <option value="衡水">衡水</option>
+        </select>
+        <br>
+        <button type="button" onclick="begin()">请求数据</button>
+        <p>output: <span id="myDiv">content</span></p>
+    </form>
+
+
+    <script>
+        var xmlHttp;
+        function createXMLHttpRequest() {
+            if (window.XMLHttpRequest) {
+                xmlHttp = new XMLHttpRequest();
+            } else {
+                xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+        }
+
+        function begin() {
+            createXMLHttpRequest();
+            xmlHttp.onreadystatechange = callback;
+
+            var start = document.getElementById("start").value;
+            var reach = document.getElementById("reach").value;
+            var data = "start=" + start + "&reach=" + reach;
+
+            xmlHttp.open("POST", "php/get_dep.php", true);
+            xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xmlHttp.send(data);
+        }
+
+        function callback() {
+            if (xmlHttp.readyState == 4)
+                if (xmlHttp.status == 200 && xmlHttp.responseText != "") {
+                    var object = JSON.parse(xmlHttp.responseText);
+                    document.getElementById("myDiv").innerHTML = object[0].start
+                        + "," + object[0].reach + "," + object[0].start_time + ","
+                        + object[0].reach_time + "," + object[0].price;
+                }
+        }
+    </script>
+</body>
+
+</html>

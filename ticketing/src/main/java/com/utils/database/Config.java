@@ -21,10 +21,8 @@ public class Config {
             String path = "Java/ticketing/config/srv.yml";
             in = new FileInputStream(path);
             assert(in != null);
-            logger.info("in--------" + in);
             props = yaml.loadAs(in, HashMap.class);
             assert(props != null);
-            logger.info(String.format(props.toString()));
         } catch (Exception e) {
             // TODO:
             logger.info(String.format("ooooooo" + e.toString()));
@@ -41,9 +39,7 @@ public class Config {
     }
 
     public Object getProp(String root, String key) {
-        logger.info("getProp table: " + root);
         Map<String, Object> rootProp = props.get(root);
-        logger.info("props: " + props);
         assert(rootProp.containsKey(key));
         return rootProp.get(key);
     }
